@@ -208,3 +208,7 @@ __marimo__/
 
 #data
 data/
+
+#notebooks
+notebooks/datasets
+notebooks/results
