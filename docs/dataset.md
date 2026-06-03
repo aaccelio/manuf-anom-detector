@@ -30,3 +30,33 @@ It offers the benefit of being quite visual for demos to customers, but at the s
 This dataset is high quality, but we are not a in industry setting. Benchmark data are different from production lines, and if we are to use production data, we would then need to consider device setup & parameters, system performance, connection... This would be a project of a another size!
 Of course, this project would then integrate into a governance, including business, cybersecurity, IT, ML-OPS etc.
 The goal here is rather to demonstrate a system and a capability, than be a OTS product.
+
+## Dataset Overview
+### Mask overview
+*cf 02_eda.ipynb for further information*
+All defect samples in the evaluated split have a ground truth mask, with the same spatial dimension as the images. No resizing issues, pixel-level evaluation is thus possible.
+
+Using component analysis, here are some interesting information : 
+num_components:
+- mean: 1.67
+- median: 2
+- min: 1
+- max: 4
+
+largest_comp_pct:
+- mean: 92.23%
+- median: 99.28%
+- min: 51.93%
+- max: 100%
+
+We see that most masks have only one main defect component. Even in the case of multiple components, there's a main one that dominates the other in terms of information contained.
+
+Some edge cases are to be expected, with the largest component being 52% only of the error.
+
+### Implication
+With regards to our previous section, here's some implications:
+- Pixel-level anomaly localization is relevant because masks are available (and at the same spatial dim as the images)
+- The model should detect one main component in most cases
+- Small components can, and I've not made myself a conviction yet, represent noise OR true defects
+
+For the last part, further data inspection is required to get a conviction.
